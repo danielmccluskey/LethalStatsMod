@@ -1,4 +1,8 @@
 ![headerimage](/gitimages/headerimg.png)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<a href="https://twitter.com/danosw_"><img src="https://img.shields.io/twitter/follow/danosw_?logo=twitter&style=for-the-badge" alt="danosw_" /></a>
+
+
 # Introduction
 A Mod for the game Lethal Company that collects and displays your stats at https://lethal.splitstats.io
 
