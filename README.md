@@ -6,6 +6,15 @@
 # Introduction
 A Mod for the game Lethal Company that collects and displays your stats at https://lethal.splitstats.io
 
+## Pre-Release Notice
+Just as a quick note, this mod is not at V1.0 yet, it is still in the testing and development stage.
+
+## Requirements/Dependencies
+This mod requires the following mods to function.
+
+1. [BepInExPack](https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/)
+2. [Coroner](https://thunderstore.io/c/lethal-company/p/EliteMasterEric/Coroner/)
+
 
 ## Installation
 To install the LethalStats Mod, you can either:
