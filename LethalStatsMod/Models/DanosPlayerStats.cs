@@ -89,7 +89,7 @@ namespace LethalStats.Models
         }
 
 
-        public static void PostResults()
+        public static bool PostResults()
         {
             try
             {
@@ -99,7 +99,7 @@ namespace LethalStats.Models
                 if ((DateTime.Now - LastSentResults).TotalSeconds < 30)
                 {
                     Debug.Log("Results were sent in the last 30 seconds, skipping");
-                    return;
+                    return true;
                 }
 
                 //if deaths is greater than 0, get the first cause of death
@@ -166,7 +166,9 @@ namespace LethalStats.Models
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
+                return false;
             }
+            return true;
         }
 
         public static void ResetValues()

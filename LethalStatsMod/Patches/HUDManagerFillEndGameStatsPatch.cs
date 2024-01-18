@@ -1,10 +1,14 @@
 ﻿using Coroner;
 using LethalStats.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Object = UnityEngine.Object;
 
 namespace LethalStats.Patches
 {
@@ -12,7 +16,45 @@ namespace LethalStats.Patches
     [HarmonyLib.HarmonyPatch("FillEndGameStats")]
     class HUDManagerFillEndGameStatsPatch
     {
-        public static string DebugPrefix = "[LethalStatsMod] [HUDManagerFillEndGameStatsPatch]: ";
+        public static void ShowResult(bool successful)
+        {
+            try
+            {
+
+
+                Debug.Log(DebugPrefix + "ShowResult called");
+                //Try to show the GUI for telling the user that the stats were posted.
+                if (GameNetworkManager.Instance.localPlayerController == null)
+                {
+
+
+                    Debug.Log(DebugPrefix + "localPlayerController is null");
+                    return;
+                }
+                Debug.Log(DebugPrefix + "localPlayerController is not null");
+
+
+
+                //Get the hudmanager instance
+                var hudManager = HUDManager.Instance;
+                if (hudManager == null)
+                {
+                    Debug.Log(DebugPrefix + "hudManager is null");
+                    return;
+                }
+
+                //Start the coroutine
+                hudManager.StartCoroutine(ShowPostResultsCoroutine(successful, hudManager));
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(DebugPrefix + ex.Message);
+            }
+
+
+        }
+
         public static void Prefix()
         {
             try
@@ -26,7 +68,7 @@ namespace LethalStats.Patches
                 //Check that hostid and roundid are set for failsafe
                 if (DanosPlayerStats.HostSteamID <= 0 || DanosPlayerStats.RoundID == null)
                 {
-                                        var hostId = instance.allPlayerScripts[0].playerClientId;
+                    var hostId = instance.allPlayerScripts[0].playerClientId;
                     var hostSteamId = instance.allPlayerScripts[hostId].playerSteamId;
 
                     if (hostSteamId <= 0) return;
@@ -36,7 +78,7 @@ namespace LethalStats.Patches
 
                     if (hostChanged)
                     {
-                        Debug.Log(DebugPrefix+"Host changed, reset the values");
+                        Debug.Log(DebugPrefix + "Host changed, reset the values");
                     }
                     else
                     {
@@ -67,14 +109,17 @@ namespace LethalStats.Patches
                 UpdateFired();
 
 
-                if(foundRoundStart == false)
+                if (foundRoundStart == false)
                 {
                     //Set start time to end time
                     DanosPlayerStats.RoundStart = DanosPlayerStats.RoundEnd;
                 }
 
                 // Post results and reset values
-                DanosPlayerStats.PostResults();
+                Debug.Log(DebugPrefix + "Posting results");
+                bool success = DanosPlayerStats.PostResults();
+                Debug.Log(DebugPrefix + $"ShowResult called {success}");
+                ShowResult(success);
                 DanosPlayerStats.ResetValues();
             }
             catch (Exception ex)
@@ -82,6 +127,39 @@ namespace LethalStats.Patches
                 Debug.Log(ex.Message);
             }
         }
+
+        
+
+        
+
+
+
+
+        private static IEnumerator ShowPostResultsCoroutine(bool Success, HUDManager __instance)
+        {
+            yield return new WaitForSeconds(22);
+
+            if(Success == true)
+            {
+                __instance.DisplayTip("Sent Stats!", "Your stats for the previous round were successfully sent to Lethal.SplitStats.io!");
+
+            }
+            else
+            {
+                __instance.DisplayTip("Stats not sent!", "Your stats for the previous round failed to send to Lethal.SplitStats.io! Please try again later.", true);
+            }
+
+
+        }
+
+
+
+
+
+
+
+        public static string DebugPrefix = "[LethalStatsMod] [HUDManagerFillEndGameStatsPatch]: ";
+        
 
         //Get DaysOnJob and TeamDeathCount and TeamStepsTaken
         private static void UpdateTeamStats(StartOfRound instance)
