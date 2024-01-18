@@ -12,21 +12,22 @@ using LethalStats.Models;
 
 namespace LethalStats.Patches
 {
-    [HarmonyPatch(typeof(StartOfRound), "StartGame")]
-    public static class StartGamePatch
+    [HarmonyPatch(typeof(StartMatchLever), "PullLeverAnim")]
+    public static class PullLeverAnimPatch
     {
-        static void Postfix(ref bool ___inShipPhase, ref SelectableLevel ___currentLevel)
+        public static string DebugPrefix = "[LethalStats] [PullLeverAnimPatch]: ";
+        static void Postfix()
         {
             try
             {
                 DanosPlayerStats.ResetValues();
                 UpdateHostInfo();
-                UpdateLevelName(___currentLevel);
+                UpdateLevelName();
                 UpdateRoundStartTime();
             }
             catch (Exception ex)
             {
-                Debug.Log($"Error in Postfix: {ex.Message}");
+                Debug.Log($"{DebugPrefix}Error in Postfix: {ex.Message}");
             }
         }
 
@@ -49,11 +50,11 @@ namespace LethalStats.Patches
 
                 if (hostChanged)
                 {
-                    Debug.Log("Host changed, reset the values");
+                    Debug.Log(DebugPrefix+"Host changed, reset the values");
                 }
                 else
                 {
-                    Debug.Log("Host is the same, do nothing");
+                    Debug.Log(DebugPrefix + "Host is the same, do nothing");
                 }
 
                 DanosPlayerStats.RoundID = $"{DanosPlayerStats.HostSteamID}&&{instance.randomMapSeed}";
@@ -61,16 +62,18 @@ namespace LethalStats.Patches
             }
             catch (Exception ex)
             {
-                Debug.Log(ex.Message);
+                Debug.Log(DebugPrefix + ex.Message);
             }
         }
 
-        private static void UpdateLevelName(SelectableLevel currentLevel)
+        private static void UpdateLevelName()
         {
             try
             {
-
-
+                //Get start of round instance
+                var instance = StartOfRound.Instance;
+                if (instance == null) return;
+                SelectableLevel currentLevel = instance.currentLevel;
                 if (currentLevel != null)
                 {
                     DanosPlayerStats.LevelName = currentLevel.sceneName;
@@ -78,7 +81,7 @@ namespace LethalStats.Patches
             }
             catch (Exception ex)
             {
-                Debug.Log(ex.Message);
+                Debug.Log(DebugPrefix + ex.Message);
             }
         }
 
@@ -90,7 +93,7 @@ namespace LethalStats.Patches
             }
             catch (Exception ex)
             {
-                Debug.Log(ex.Message);
+                Debug.Log(DebugPrefix + ex.Message);
             }
         }
     }
