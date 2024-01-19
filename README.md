@@ -1,4 +1,4 @@
-![headerimage](gitimages/headerimg.png)
+![headerimage](https://imgur.com/ACRA5BM.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<a href="https://twitter.com/danosw_"><img src="https://img.shields.io/twitter/follow/danosw_?logo=twitter&style=for-the-badge" alt="danosw_" /></a>
 
@@ -35,22 +35,22 @@ Once the mod is installed and enabled, it will automatically collect your stats 
 ### Success Message
 A success message to indicate your stats were successfully sent after each round.
 
-![Success Message](gitimages/sentstats.jpg)
+![Success Message](https://imgur.com/EfDztgN.jpg)
 
 ### Total Stats
 A total of your stats calculated from your match history
 
-![Total Stats Preview](gitimages/totalstats.png)
+![Total Stats Preview](https://imgur.com/OJoUP2Z.png)
 
 ### Most Deaths to Enemies
 A list of your top 5 most died to enemies.
 
-![Enemy Deaths Preview](gitimages/totalenemydeaths.png)
+![Enemy Deaths Preview](https://imgur.com/ISWNgKD.png)
 
 ### Match History
 A post-game summary of your different matches.
 
-![Match History](gitimages/matchhistory.png)
+![Match History](https://imgur.com/CGYgDee.png)
 
 ## Contributing
 If you would like to contribute to the development of LethalStatsMod, please submit a pull request or contact me on Twitter @Danosw_
