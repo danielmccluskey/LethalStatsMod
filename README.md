@@ -6,6 +6,9 @@
 # Introduction
 A Mod for the game Lethal Company that collects and displays your stats at https://lethal.splitstats.io
 
+You can see an example by visiting my profile page (Most of my match history will be me instantly jumping off the ship to test the mod settings :D) https://lethal.splitstats.io/r/danielmclovin69
+
+
 ## Pre-Release Notice
 Just as a quick note, this mod is not at V1.0 yet, it is still in the testing and development stage.
 
