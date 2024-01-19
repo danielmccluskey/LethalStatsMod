@@ -56,5 +56,6 @@
 
     <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
       <Exec Command="xcopy &quot;$(TargetDir)LethalStats.dll&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\&quot; /Y&#xD;&#xA;" />
+      <Exec Command="xcopy &quot;$(TargetDir)LethalStats.dll&quot; &quot;C:\Users\Dan\Documents\GitHub\LethalStatsMod\Packaged\BepInEx\plugins\&quot; /Y&#xD;&#xA;" />
     </Target>
 </Project>
