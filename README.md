@@ -1,4 +1,4 @@
-![headerimage](/gitimages/headerimg.png)
+![headerimage](gitimages/headerimg.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<a href="https://twitter.com/danosw_"><img src="https://img.shields.io/twitter/follow/danosw_?logo=twitter&style=for-the-badge" alt="danosw_" /></a>
 
@@ -27,11 +27,27 @@ To install the LethalStats Mod, you can either:
 Once the mod is installed and enabled, it will automatically collect your stats and post them to the website. You can access your stats by visiting the website https://lethal.splitstats.io and entering your Steam ID.
 
 
+## Preview Images
+
+### Total Stats
+A total of your stats calculated from your match history
+
+![Total Stats Preview](gitimages/totalstats.png)
+
+### Most Deaths to Enemies
+A list of your top 5 most died to enemies.
+
+![Enemy Deaths Preview](gitimages/totalenemydeaths.png)
+
+### Match History
+A post-game summary of your different matches.
+
+![Match History](gitimages/matchhistory.png)
+
 ## Contributing
 If you would like to contribute to the development of LethalStatsMod, please submit a pull request or contact me on Twitter @Danosw_
 
 ## License
 LethalStatsMod is released under the MIT License. Do what you want with it.
 
-## Preview Images
 
