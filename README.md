@@ -32,6 +32,11 @@ Once the mod is installed and enabled, it will automatically collect your stats 
 
 ## Preview Images
 
+### Success Message
+A success message to indicate your stats were successfully sent after each round.
+
+![Success Message](gitimages/sentstats.jpg)
+
 ### Total Stats
 A total of your stats calculated from your match history
 
