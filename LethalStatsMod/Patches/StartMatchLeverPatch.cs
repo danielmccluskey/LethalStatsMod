@@ -9,6 +9,7 @@ using System.Text;
 using UnityEngine;
 using Coroner;
 using LethalStats.Models;
+using System.Collections;
 
 namespace LethalStats.Patches
 {
@@ -18,18 +19,37 @@ namespace LethalStats.Patches
         public static string DebugPrefix = "[LethalStats] [PullLeverAnimPatch]: ";
         static void Postfix()
         {
+              
             try
             {
-                DanosPlayerStats.ResetValues();
-                UpdateHostInfo();
-                UpdateLevelName();
-                UpdateRoundStartTime();
+                StartOfRound startOfRound = StartOfRound.Instance;
+                if (startOfRound == null) return;
+
+                //If inshipphase, reset the values otherwise don't do anything
+                if (startOfRound.inShipPhase)
+                {
+                    Debug.Log(DebugPrefix + "In ship phase, reset the values");
+                    DanosPlayerStats.ResetValues();
+                    UpdateHostInfo();
+                    UpdateLevelName();
+                    UpdateRoundStartTime();
+                }
+                else
+                {
+                    Debug.Log(DebugPrefix + "Not in ship phase, do nothing");
+                }
+
             }
             catch (Exception ex)
             {
                 Debug.Log($"{DebugPrefix}Error in Postfix: {ex.Message}");
             }
         }
+
+       
+
+
+
 
         private static void UpdateHostInfo()
         {
