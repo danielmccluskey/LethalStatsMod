@@ -141,12 +141,12 @@ namespace LethalStats.Patches
 
             if(Success == true)
             {
-                __instance.DisplayTip("Sent Stats!", "Your stats for the previous round were successfully sent to Lethal.SplitStats.io!");
+                __instance.DisplayTip("Sent Stats!", "Stats successfully sent to Lethal.SplitStats.io!");
 
             }
             else
             {
-                __instance.DisplayTip("Stats not sent!", "Your stats for the previous round failed to send to Lethal.SplitStats.io! Please try again later.", true);
+                __instance.DisplayTip("Stats not sent!", "Failed to send stats to Lethal.SplitStats.io. Try again later.", true);
             }
 
 

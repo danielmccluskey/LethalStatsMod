@@ -141,7 +141,8 @@ namespace LethalStats.Models
                     PlayersDead = DanosPlayerStats.PlayersDead,
                     TotalScrapCollectedThisRound = DanosPlayerStats.TotalScrapCollectedThisRound,
                     TotalScrapOnMap = DanosPlayerStats.TotalScrapOnMap,
-                    Fired = DanosPlayerStats.Fired
+                    Fired = DanosPlayerStats.Fired,
+                    Events = new List<DanosPlayerEvent>()
 
 
 
