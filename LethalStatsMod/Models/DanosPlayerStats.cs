@@ -109,6 +109,23 @@ namespace LethalStats.Models
                     causeOfDeath = deathCounts.FirstOrDefault().Key.ToString();
                 }
 
+                var gamenumber = 49;
+                try
+                {
+
+
+                    GameNetworkManager gameNetworkManager = GameNetworkManager.Instance;
+                    if (gameNetworkManager != null)
+                    {
+                        gamenumber = gameNetworkManager.gameVersionNum;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+
+
 
 
 
@@ -142,6 +159,7 @@ namespace LethalStats.Models
                     TotalScrapCollectedThisRound = DanosPlayerStats.TotalScrapCollectedThisRound,
                     TotalScrapOnMap = DanosPlayerStats.TotalScrapOnMap,
                     Fired = DanosPlayerStats.Fired,
+                    GameVersion = gamenumber,
                     Events = new List<DanosPlayerEvent>()
 
 
