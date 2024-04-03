@@ -19,6 +19,7 @@ namespace LethalStats.Models
         public static string LevelName { get; set; } = "Unknown";
 
         public static List<DanosPlayerEvent> PlayerEvents = new List<DanosPlayerEvent>();
+        public static List<DanosPlayerItem> PlayerItems = new List<DanosPlayerItem>();
         public static bool HasSentResults = false;
 
         public static bool RoundInitialized = false;
@@ -125,6 +126,18 @@ namespace LethalStats.Models
                     Debug.Log(ex.Message);
                 }
 
+                //Collect users mods to send to the API for challenges.
+                List<DanosPlayerMods> mods = new List<DanosPlayerMods>();
+                try
+                {
+                    mods = DanosPlayerMods.CollectMods();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                    mods = new();
+                }
+
 
 
 
@@ -160,9 +173,9 @@ namespace LethalStats.Models
                     TotalScrapOnMap = DanosPlayerStats.TotalScrapOnMap,
                     Fired = DanosPlayerStats.Fired,
                     GameVersion = gamenumber,
-                    Events = new List<DanosPlayerEvent>()
-
-
+                    Events = new List<DanosPlayerEvent>(),
+                    Mods = mods,
+                    Items = DanosPlayerStats.PlayerItems
 
 
 
@@ -175,6 +188,7 @@ namespace LethalStats.Models
                 //Post to the API but don't wait for a response as we don't want to block the game
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri("https://lethalstatsmiddleman.azurewebsites.net");
+                //client.BaseAddress = new Uri("http://localhost:7023");
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 client.PostAsync("/api/PostResults?", content);
 
@@ -190,10 +204,13 @@ namespace LethalStats.Models
             return true;
         }
 
+
+
         public static void ResetValues()
         {
             DanosPlayerStats.RoundID = "";
             DanosPlayerStats.PlayerEvents = new List<DanosPlayerEvent>();
+            DanosPlayerStats.PlayerItems = new List<DanosPlayerItem>();
             DanosPlayerStats.HasSentResults = false;
             DanosPlayerStats.DaysOnTheJob = 0;
             DanosPlayerStats.ScrapValueCollected = 0;

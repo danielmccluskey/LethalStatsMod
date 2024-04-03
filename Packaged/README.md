@@ -9,7 +9,7 @@ A Mod for the game Lethal Company that collects and displays your stats at https
 You can see an example by visiting my profile page (Most of my match history will be me instantly jumping off the ship to test the mod settings :D) https://lethal.splitstats.io/r/danielmclovin69
 
 #### Stats as of 25/03/2024
-Over 70000 users and 1.5 Million matches recorded so far!
+Over 80000 users and 1.8 Million matches recorded so far!
 
 
 ## Pre-Release Notice
