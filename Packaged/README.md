@@ -4,11 +4,11 @@
 
 
 # Introduction
-A Mod for the game Lethal Company that collects and displays your stats at https://lethal.splitstats.io
+A Mod for the game Lethal Company that collects and displays your stats at https://splitstats.io
 
-You can see an example by visiting my profile page (Most of my match history will be me instantly jumping off the ship to test the mod settings :D) https://lethal.splitstats.io/r/danielmclovin69
+You can see an example by visiting my profile page (Most of my match history will be me instantly jumping off the ship to test the mod settings :D) https://splitstats.io/r/danielmclovin69
 
-#### Stats as of 25/03/2024
+#### Stats as of 06/04/2024
 Over 80000 users and 1.8 Million matches recorded so far!
 
 
@@ -30,7 +30,7 @@ To install the LethalStats Mod, you can either:
 
 
 ## Usage
-Once the mod is installed and enabled, it will automatically collect your stats and post them to the website. You can access your stats by visiting the website https://lethal.splitstats.io and entering your Steam ID.
+Once the mod is installed and enabled, it will automatically collect your stats and post them to the website. You can access your stats by visiting the website https://splitstats.io and entering your Steam ID.
 
 
 ## Preview Images

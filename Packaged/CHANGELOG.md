@@ -1,3 +1,6 @@
+#### v 0.9.5
+Now collects stats about sold items for global challenges feature.
+
 #### v 0.9.4
 Now collects stats about collected items and mods in preparation for the launch of daily challenges.
 
