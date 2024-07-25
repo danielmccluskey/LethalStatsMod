@@ -289,10 +289,16 @@ namespace LethalStats.Patches
                 if (instance.localPlayerController.isPlayerDead)
                 {
 
-                    var causeOfDeath = AdvancedDeathTracker.GetCauseOfDeath(instance.localPlayerController);
-                    if (causeOfDeath != null)
+                    //var causeOfDeath = AdvancedDeathTracker.GetCauseOfDeath(instance.localPlayerController);
+                    //if (causeOfDeath != null)
+                    //{
+                    //    DanosPlayerStats.IncrementDeathCount(causeOfDeath);
+                    //}
+
+                    var causeOfDeathAPI = Coroner.API.GetCauseOfDeath(instance.localPlayerController);
+                    if (causeOfDeathAPI != null)
                     {
-                        DanosPlayerStats.IncrementDeathCount(causeOfDeath);
+                        DanosPlayerStats.IncrementDeathCount(causeOfDeathAPI);
                     }
 
                 }

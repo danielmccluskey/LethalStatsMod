@@ -67,8 +67,8 @@ namespace LethalStats.Models
 
         public static int Deaths { get; set; }
 
-        public static Dictionary<AdvancedCauseOfDeath, int> deathCounts = new Dictionary<AdvancedCauseOfDeath, int>();
-        public static void IncrementDeathCount(AdvancedCauseOfDeath cause)
+        public static Dictionary<AdvancedCauseOfDeath?, int> deathCounts = new Dictionary<AdvancedCauseOfDeath?, int>();
+        public static void IncrementDeathCount(AdvancedCauseOfDeath? cause)
         {
             if (!deathCounts.ContainsKey(cause))
             {
@@ -79,7 +79,7 @@ namespace LethalStats.Models
             Deaths++;
         }
 
-        public static int GetDeathCount(AdvancedCauseOfDeath cause)
+        public static int GetDeathCount(AdvancedCauseOfDeath? cause)
         {
             return deathCounts.ContainsKey(cause) ? deathCounts[cause] : 0;
         }
