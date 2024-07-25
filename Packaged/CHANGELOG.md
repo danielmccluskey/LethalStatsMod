@@ -1,3 +1,6 @@
+#### v 1.0.0
+Added global stats collection and orders.
+
 #### v 0.9.5
 Now collects stats about sold items for global challenges feature.
 
