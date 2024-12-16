@@ -1,10 +1,10 @@
 {
   "name": "LethalStats",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://splitstats.io",
   "description": "A Mod for the game Lethal Company that collects and displays your stats at https://splitstats.io",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2100",
-    "EliteMasterEric-Coroner-2.0.0"
+    "EliteMasterEric-Coroner-2.2.0"
   ]
 }

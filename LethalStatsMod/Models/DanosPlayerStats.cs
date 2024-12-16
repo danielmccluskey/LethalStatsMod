@@ -187,10 +187,10 @@ namespace LethalStats.Models
 
                 //Post to the API but don't wait for a response as we don't want to block the game
                 HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("https://lethalstatsmiddleman.azurewebsites.net");
-                //client.BaseAddress = new Uri("http://localhost:7023");
+                client.BaseAddress = new Uri("https://lethal.api.splitstats.io");
+                //client.BaseAddress = new Uri("http://localhost:7000");
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                client.PostAsync("/api/PostResults?", content);
+                client.PostAsync("/api/match/results?", content);
 
 
                 //Set the last sent results to now
@@ -238,9 +238,16 @@ namespace LethalStats.Models
 
         }
 
+        //Generate a sha256 hashed version of the given string
+        internal static string GetSHA256(string roundString)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(roundString));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
 
 
-
-
+            }
+        }
     }
 }
