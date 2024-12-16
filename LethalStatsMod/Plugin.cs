@@ -5,7 +5,14 @@ using LethalStats.Patches;
 
 namespace LethalStats
 {
-    
+    public class PluginInfo
+    {
+        public const string PLUGIN_GUID = "com.danos.lethalstats";
+        public const string PLUGIN_NAME = "LethalStats";
+        public const string PLUGIN_VERSION = "1.0.1";
+    }
+
+
 
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInDependency("com.elitemastereric.coroner", BepInDependency.DependencyFlags.HardDependency)]

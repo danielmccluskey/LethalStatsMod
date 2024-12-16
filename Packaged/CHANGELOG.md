@@ -1,3 +1,9 @@
+#### v 1.0.1
+Normalised api endpoint so I can change it in the future, added new RoundID for grouping lobbies of people together. Removed the "Submitted to LethalStats" prompt after every round.
+
+#### v 1.0.0
+Added global stats collection and orders.
+
 #### v 0.9.5
 Now collects stats about sold items for global challenges feature.
 

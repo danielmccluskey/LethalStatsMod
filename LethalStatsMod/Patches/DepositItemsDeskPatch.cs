@@ -131,6 +131,25 @@ namespace LethalStats.Patches
                 Console.WriteLine($"[LethalStats] [DepositItemsDeskPatch]: Error in Prefix: {ex.Message}");
             }
 
+            //Any time we sell, lets try and update the global challenges
+            try
+            {
+                Terminal term = TerminalPatches.Terminal;
+                if(term != null)
+                {
+                    //Start a coroutine to update the global challenges
+                    term.StartCoroutine(TerminalPatches.GatherGlobalStatsCoroutine(term));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[LethalStats] [DepositItemsDeskPatch]: Error in updating global challenges: {ex.Message}");
+            }
+
+
+
+
+
             return true;
         }
     }

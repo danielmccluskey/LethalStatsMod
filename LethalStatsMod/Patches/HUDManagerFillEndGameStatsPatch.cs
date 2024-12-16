@@ -85,7 +85,14 @@ namespace LethalStats.Patches
                         Debug.Log(DebugPrefix + "Host is the same, do nothing");
                     }
 
-                    DanosPlayerStats.RoundID = $"{DanosPlayerStats.HostSteamID}&&{instance.randomMapSeed}";
+
+
+                    //sha256 hash the string
+                    DanosPlayerStats.RoundID = GenerateRoundID(instance);
+
+
+
+                    //DanosPlayerStats.RoundID = $"{DanosPlayerStats.HostSteamID}&&{instance.randomMapSeed}";
                     DanosPlayerStats.RoundInitialized = true;
 
 
@@ -115,11 +122,14 @@ namespace LethalStats.Patches
                     DanosPlayerStats.RoundStart = DanosPlayerStats.RoundEnd;
                 }
 
+                //sha256 hash the string
+                DanosPlayerStats.RoundID = GenerateRoundID(instance);
+
                 // Post results and reset values
                 Debug.Log(DebugPrefix + "Posting results");
                 bool success = DanosPlayerStats.PostResults();
                 Debug.Log(DebugPrefix + $"ShowResult called {success}");
-                ShowResult(success);
+                //ShowResult(success);
                 DanosPlayerStats.ResetValues();
             }
             catch (Exception ex)
@@ -130,7 +140,43 @@ namespace LethalStats.Patches
 
         
 
-        
+        //generate round id
+        private static string GenerateRoundID(StartOfRound instance)
+        {
+            try
+            {
+                var hostId = instance.allPlayerScripts[0].playerClientId;
+                var hostSteamId = instance.allPlayerScripts[hostId].playerSteamId;
+                if (hostSteamId <= 0) return null;
+                var hostChanged = hostSteamId != DanosPlayerStats.HostSteamID;
+                DanosPlayerStats.HostSteamID = hostSteamId;
+                if (hostChanged)
+                {
+                    Debug.Log(DebugPrefix + "Host changed, reset the values");
+                }
+                else
+                {
+                    Debug.Log(DebugPrefix + "Host is the same, do nothing");
+                }
+                //Make a comma delmited string of the host steam id and all the other player steam ids in descending order
+                //This way we can have a unique round id for grouping lobbies without collecting personally identifiable information from players who don't have the mod.
+                var allPlayerSteamIds = instance.allPlayerScripts.Select(x => x.playerSteamId).OrderByDescending(x => x).ToList();
+                var allPlayerSteamIdsString = string.Join(",", allPlayerSteamIds);
+                var roundString = $"{hostSteamId.ToString()},{allPlayerSteamIdsString}";
+                //sha256 hash the string
+                return DanosPlayerStats.GetSHA256(roundString);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(DebugPrefix + ex.Message);
+                return null;
+            }
+        }
+
+
+
+
+
 
 
 
@@ -289,10 +335,16 @@ namespace LethalStats.Patches
                 if (instance.localPlayerController.isPlayerDead)
                 {
 
-                    var causeOfDeath = AdvancedDeathTracker.GetCauseOfDeath(instance.localPlayerController);
-                    if (causeOfDeath != null)
+                    //var causeOfDeath = AdvancedDeathTracker.GetCauseOfDeath(instance.localPlayerController);
+                    //if (causeOfDeath != null)
+                    //{
+                    //    DanosPlayerStats.IncrementDeathCount(causeOfDeath);
+                    //}
+
+                    var causeOfDeathAPI = Coroner.API.GetCauseOfDeath(instance.localPlayerController);
+                    if (causeOfDeathAPI != null)
                     {
-                        DanosPlayerStats.IncrementDeathCount(causeOfDeath);
+                        DanosPlayerStats.IncrementDeathCount(causeOfDeathAPI);
                     }
 
                 }
